@@ -15,12 +15,15 @@ $color-invalid: #dc3545
 body
   margin: 0
   box-sizing: border-box
-  font-family: 'Open Sans', sans-serif
+  font-family: "Roboto", sans-serif
 
 .container
   max-width: 1280px
   margin: 0 auto
   padding: 0 2rem
+
+.form
+  margin-bottom: 100px
 
 .heading
   margin: 0
@@ -111,6 +114,17 @@ body
 .required
   color: $color-invalid
 
+.tel-group
+  position: relative
+
+.tel-input
+  padding: 0.75rem 1rem 0.75rem 2.25rem
+
+.num-prefix
+  position: absolute
+  top: 40px
+  left: 18px
+
 .newsletter
   display: flex
   align-items: center
@@ -125,6 +139,22 @@ body
 
 .pasport
   @include form-section
+
+.create-btn
+  display: block
+  margin: 40px auto 0 auto
+  padding: 0.8rem 1.75rem
+  background-color: rgb(29, 114, 224)
+  border: none
+  border-radius: 3px
+  font-size: 1rem
+  font-weight: 500
+  cursor: pointer
+  color: #fff
+  transition: background-color, box-shadow 0.2s
+  &:hover
+    background-color: rgb(25, 100, 197)
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2)
 
 .form-input_error
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e")
