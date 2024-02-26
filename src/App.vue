@@ -333,6 +333,103 @@
           </div>
         </div>
       </div>
+      <div class="address">
+        <h2 class="heading">Адрес</h2>
+        <div class="form-group">
+          <label
+            for="postcode"
+            class="form-label"
+            >Индекс</label
+          >
+          <input
+            type="text"
+            v-bind="$v.clientRegForm.postcode"
+            class="form-input"
+            id="postcode"
+            placeholder="Введите индекс"
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="country"
+            class="form-label"
+            >Страна</label
+          >
+          <input
+            type="text"
+            v-bind="$v.clientRegForm.country"
+            class="form-input"
+            id="country"
+            placeholder="Введите страну"
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="region"
+            class="form-label"
+            >Область</label
+          >
+          <input
+            type="text"
+            v-bind="$v.clientRegForm.region"
+            class="form-input"
+            id="region"
+            placeholder="Введите область"
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="city"
+            class="form-label"
+            >Город <span class="required">*</span></label
+          >
+          <input
+            type="text"
+            class="form-input"
+            id="city"
+            placeholder="Введите город"
+            v-model="$v.clientRegForm.city.$model"
+            :class="{ 'form-input_error': $v.clientRegForm.city.$error }"
+            @blur="$v.clientRegForm.city.$touch()"
+          />
+          <div
+            class="form_error"
+            v-if="
+              $v.clientRegForm.city.$dirty && !$v.clientRegForm.city.required
+            "
+          >
+            Поле обязательно для заполнения
+          </div>
+        </div>
+        <div class="form-group">
+          <label
+            for="street"
+            class="form-label"
+            >Улица</label
+          >
+          <input
+            type="text"
+            v-bind="$v.clientRegForm.street"
+            class="form-input"
+            id="street"
+            placeholder="Введите улицу"
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="house"
+            class="form-label"
+            >Дом</label
+          >
+          <input
+            type="text"
+            v-bind="$v.clientRegForm.house"
+            class="form-input"
+            id="house"
+            placeholder="Введите номер дома"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -354,6 +451,12 @@
           clientGroup: [],
           selectedDoctor: "",
           newsletter: false,
+          postcode: "",
+          country: "",
+          region: "",
+          city: "",
+          street: "",
+          house: "",
         },
       };
     },
@@ -418,6 +521,9 @@
           minLength: minLength(12),
         },
         clientGroup: {
+          required,
+        },
+        city: {
           required,
         },
       },
