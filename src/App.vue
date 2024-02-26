@@ -211,7 +211,7 @@
             autocomplete="off"
             maxlength="12"
             placeholder="+7__________"
-            onfocus="if (this.value === '') { this.value = '+7'; }"
+            @focus="addPrefix"
             v-model="$v.clientRegForm.phoneNumber.$model"
             @input="maskNumber"
             @blur="$v.clientRegForm.phoneNumber.$touch()"
@@ -618,6 +618,11 @@
         this.clientRegForm.newsletter === false
           ? (this.clientRegForm.newsletter = true)
           : (this.clientRegForm.newsletter = false);
+      },
+      addPrefix() {
+        if (this.clientRegForm.phoneNumber === "") {
+          this.clientRegForm.phoneNumber = "+7";
+        }
       },
     },
     validations: {
