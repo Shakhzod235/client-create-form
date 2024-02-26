@@ -2,6 +2,7 @@
   <div id="app">
     <div class="container">
       <div class="client-reg-form">
+        <h2 class="heading">Личные данные</h2>
         <div class="form-group">
           <label
             for="lastName"
@@ -80,7 +81,7 @@
           <label
             for="middleName"
             class="form-label"
-            >Отчество (необязательно)</label
+            >Отчество</label
           >
           <input
             type="text"
@@ -114,7 +115,7 @@
               type="tel"
               class="form-input birthday-number"
               v-model.trim="$v.clientRegForm.day.$model"
-              @blur="$v.clientRegForm.day.$touch()"
+              @blur="isMonthSelect"
               :class="{
                 'form-input_error':
                   $v.clientRegForm.day.$error ||
@@ -164,7 +165,7 @@
               type="tel"
               class="form-input birthday-number"
               v-model.trim="$v.clientRegForm.year.$model"
-              @blur="$v.clientRegForm.year.$touch()"
+              @blur="isMonthSelect"
               :class="{
                 'form-input_error':
                   $v.clientRegForm.day.$error ||
@@ -232,7 +233,7 @@
           <label
             for="sex"
             class="form-label"
-            >Пол (необязательно)</label
+            >Пол</label
           >
           <select
             class="form-select"
@@ -322,14 +323,18 @@
         </div>
         <div class="form-group">
           <div class="newsletter">
-            <label for="newsletter">Не отправлять смс</label>
             <input
               type="checkbox"
-              class="newsletter-checkbox"
               @click="getValue"
               name="subscribe"
               id="newsletter"
+              class="newsletter-checkbox"
             />
+            <label
+              for="newsletter"
+              class="newsletter-label"
+              >Не отправлять смс</label
+            >
           </div>
         </div>
       </div>
@@ -343,6 +348,7 @@
           >
           <input
             type="text"
+            autocomplete="off"
             v-bind="$v.clientRegForm.postcode"
             class="form-input"
             id="postcode"
@@ -352,11 +358,13 @@
         <div class="form-group">
           <label
             for="country"
+            autocomplete="off"
             class="form-label"
             >Страна</label
           >
           <input
             type="text"
+            autocomplete="off"
             v-bind="$v.clientRegForm.country"
             class="form-input"
             id="country"
@@ -371,6 +379,7 @@
           >
           <input
             type="text"
+            autocomplete="off"
             v-bind="$v.clientRegForm.region"
             class="form-input"
             id="region"
@@ -385,6 +394,7 @@
           >
           <input
             type="text"
+            autocomplete="off"
             class="form-input"
             id="city"
             placeholder="Введите город"
@@ -423,11 +433,127 @@
           >
           <input
             type="text"
+            autocomplete="off"
             v-bind="$v.clientRegForm.house"
             class="form-input"
             id="house"
             placeholder="Введите номер дома"
           />
+        </div>
+      </div>
+      <div class="pasport">
+        <h2 class="heading">Паспорт</h2>
+        <div class="form-group">
+          <label
+            for="documentType"
+            class="form-label"
+            >Тип документа <span class="required">*</span></label
+          >
+          <select
+            id="documentType"
+            name="documentType"
+            class="form-select"
+            v-model="$v.clientRegForm.documentType.$model"
+            :class="{
+              'form-input_error': $v.clientRegForm.documentType.$error,
+            }"
+            @blur="$v.clientRegForm.documentType.$touch()"
+          >
+            <option
+              value=""
+              selected
+              disabled
+            >
+              Выберите тип документа
+            </option>
+            <option value="pasport">Паспорт</option>
+            <option value="birthCertificate">Свидетельство о рождении</option>
+            <option value="driversLicense">Вод. удостоверение</option>
+          </select>
+          <div
+            class="form_error"
+            v-if="
+              $v.clientRegForm.documentType.$dirty &&
+              !$v.clientRegForm.documentType.required
+            "
+          >
+            Поле обязательно для заполнения
+          </div>
+        </div>
+        <div class="form-group">
+          <label
+            for="series"
+            autocomplete="off"
+            class="form-label"
+            >Серия</label
+          >
+          <input
+            type="text"
+            autocomplete="off"
+            v-bind="$v.clientRegForm.series"
+            class="form-input"
+            id="series"
+            placeholder="Введите серию"
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="number"
+            autocomplete="off"
+            class="form-label"
+            >Номер</label
+          >
+          <input
+            type="text"
+            autocomplete="off"
+            v-bind="$v.clientRegForm.number"
+            class="form-input"
+            id="number"
+            placeholder="Введите номер"
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="issuedBy"
+            autocomplete="off"
+            class="form-label"
+            >Кем выдан</label
+          >
+          <input
+            type="text"
+            autocomplete="off"
+            v-bind="$v.clientRegForm.issuedBy"
+            class="form-input"
+            id="issuedBy"
+            placeholder="Введите кем выдан"
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="issuedDate"
+            autocomplete="off"
+            class="form-label"
+            >Дата выдачи <span class="required">*</span></label
+          >
+          <input
+            type="text"
+            autocomplete="off"
+            class="form-input"
+            id="issuedDate"
+            placeholder="Введите дату выдачи"
+            v-model="$v.clientRegForm.issueDate.$model"
+            :class="{ 'form-input_error': $v.clientRegForm.issueDate.$error }"
+            @blur="$v.clientRegForm.issueDate.$touch()"
+          />
+          <div
+            class="form_error"
+            v-if="
+              $v.clientRegForm.issueDate.$dirty &&
+              !$v.clientRegForm.issueDate.required
+            "
+          >
+            Поле обязательно для заполнения
+          </div>
         </div>
       </div>
     </div>
@@ -457,6 +583,11 @@
           city: "",
           street: "",
           house: "",
+          documentType: "",
+          series: "",
+          number: "",
+          issuedBy: "",
+          issueDate: "",
         },
       };
     },
@@ -524,6 +655,12 @@
           required,
         },
         city: {
+          required,
+        },
+        documentType: {
+          required,
+        },
+        issueDate: {
           required,
         },
       },
