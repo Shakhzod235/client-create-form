@@ -136,7 +136,7 @@
                 class="form-select month-select"
                 id="month"
                 v-model.trim="$v.clientRegForm.month.$model"
-                @blur="isMonthSelect"
+                @blur="$v.clientRegForm.month.$touch()"
                 :class="{
                   'form-input_error': $v.clientRegForm.month.$error,
                 }"
@@ -598,11 +598,6 @@
       };
     },
     methods: {
-      isMonthSelect() {
-        if (this.clientRegForm.month === "") {
-          this.$v.clientRegForm.month.$touch();
-        }
-      },
       getValue() {
         this.clientRegForm.newsletter === false
           ? (this.clientRegForm.newsletter = true)
@@ -667,7 +662,6 @@
         },
         day: {
           required,
-          minLength: minLength(2),
         },
         month: {
           required,
