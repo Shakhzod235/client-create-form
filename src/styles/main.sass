@@ -17,6 +17,11 @@ body
   box-sizing: border-box
   font-family: "Roboto", sans-serif
 
+input,
+button,
+select
+  font-family: "Roboto", sans-serif
+
 .container
   max-width: 1280px
   margin: 0 auto
@@ -83,9 +88,14 @@ body
   appearance: none
   border: $border
   border-radius: 5px
+  color: rgb(32,33,36)
   font-size: 1rem
 
+  &:hover
+    border: $border-hover
+  &:focus,
   &:focus-visible
+    border: $border-focus
     outline: 0
 
 .multiple-selector
@@ -181,17 +191,17 @@ body
     margin-top: 30px
 
   .form-group
-    width: 320px
+    width: 340px
 
   .birthday-number
-    width: 47px
+    width: 56px
 
   .client-groups
     height: 45px
     .client-groups__option
       padding: 0.75rem 1rem
 
-@media(max-width: 425px)
+@media(max-width: 374px)
   .container
     max-width: 540px
     padding: 0 1rem
