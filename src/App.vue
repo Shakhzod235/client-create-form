@@ -122,6 +122,7 @@
                 class="form-input birthday-number"
                 v-model.trim="$v.clientRegForm.day.$model"
                 @blur="$v.clientRegForm.day.$touch()"
+                @input="onlyNumbers"
                 :class="{
                   'form-input_error': $v.clientRegForm.day.$error,
                 }"
@@ -166,6 +167,7 @@
                 class="form-input birthday-number"
                 v-model.trim="$v.clientRegForm.year.$model"
                 @blur="$v.clientRegForm.year.$touch()"
+                @input="onlyNumbers"
                 :class="{
                   'form-input_error': $v.clientRegForm.year.$error,
                 }"
@@ -209,7 +211,7 @@
               maxlength="17"
               placeholder="(___) ___-____"
               v-model="$v.clientRegForm.phoneNumber.$model"
-              @input="handleInput"
+              @input="telMask"
               @blur="$v.clientRegForm.phoneNumber.$touch()"
               :class="{
                 'form-input_error': $v.clientRegForm.phoneNumber.$error,
@@ -504,9 +506,10 @@
             <input
               type="text"
               autocomplete="off"
-              v-bind="$v.clientRegForm.number"
+              v-model="clientRegForm.number"
               class="form-input"
               id="number"
+              @input="onlyNumbers"
               placeholder="Введите номер"
             />
           </div>
@@ -608,7 +611,7 @@
         if (this.$v.$invalid) {
           return;
         }
-        console.log("Новый клиент успешно создан");
+        alert("Новый клиент успешно создан");
       },
       onDateInput(event) {
         const cleanedInput = event.target.value.replace(/\D/g, "");
@@ -626,7 +629,7 @@
             cleanedInput.slice(4, 8);
         }
       },
-      handleInput(event) {
+      telMask(event) {
         let unmaskedValue = event.target.value.replace(/\D/g, "");
         let formattedValue = "";
 
@@ -642,6 +645,10 @@
         }
 
         this.clientRegForm.phoneNumber = formattedValue;
+      },
+      onlyNumbers(event) {
+        let unmaskedValue = event.target.value.replace(/\D/g, "");
+        this.clientRegForm[event.target.id] = unmaskedValue;
       },
     },
     validations: {
