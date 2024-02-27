@@ -667,7 +667,7 @@
         },
         day: {
           required,
-          minLength: minLength(2),
+          minLength: minLength(1),
         },
         month: {
           required,
