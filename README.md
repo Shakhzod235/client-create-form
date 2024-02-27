@@ -1,5 +1,10 @@
 # client-create-form
 
+## Deploy
+```
+https://shakhzod235.github.io/client-create-form/dist/
+```
+
 ## Project setup
 
 ```
