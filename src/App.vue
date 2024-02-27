@@ -121,12 +121,9 @@
                 type="tel"
                 class="form-input birthday-number"
                 v-model.trim="$v.clientRegForm.day.$model"
-                @blur="isMonthSelect"
+                @blur="$v.clientRegForm.day.$touch()"
                 :class="{
-                  'form-input_error':
-                    $v.clientRegForm.day.$error ||
-                    $v.clientRegForm.month.$error ||
-                    $v.clientRegForm.year.$error,
+                  'form-input_error': $v.clientRegForm.day.$error,
                 }"
                 id="day"
                 maxlength="2"
@@ -141,10 +138,7 @@
                 v-model.trim="$v.clientRegForm.month.$model"
                 @blur="isMonthSelect"
                 :class="{
-                  'form-input_error':
-                    $v.clientRegForm.day.$error ||
-                    $v.clientRegForm.month.$error ||
-                    $v.clientRegForm.year.$error,
+                  'form-input_error': $v.clientRegForm.month.$error,
                 }"
               >
                 <option
@@ -171,12 +165,9 @@
                 type="tel"
                 class="form-input birthday-number"
                 v-model.trim="$v.clientRegForm.year.$model"
-                @blur="isMonthSelect"
+                @blur="$v.clientRegForm.year.$touch()"
                 :class="{
-                  'form-input_error':
-                    $v.clientRegForm.day.$error ||
-                    $v.clientRegForm.month.$error ||
-                    $v.clientRegForm.year.$error,
+                  'form-input_error': $v.clientRegForm.year.$error,
                 }"
                 name="year"
                 maxlength="4"
